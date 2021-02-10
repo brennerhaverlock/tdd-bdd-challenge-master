@@ -82,13 +82,39 @@ it("Should create a new (object) Item with name and price", function() {
   expect(item).to.have.property("quantity", 1)
 })
 
-it("Should return an array containing all items in cart")
+it("Should return an array containing all items in cart", function () {
+  const item = utils.createItem('apple', 0.99)
+  utils.addItemToCart(item);
+  const cart = utils.getShoppingCart();
+  expect(cart).to.be.a('array');
+  expect(cart).to.have.lengthOf(1);
+})
 
-it("Should add a new item to the shopping cart")
+it("Should add a new item to the shopping cart"), function() {
+  const item = utils.createItem('apple', 0.99)
+  utils.addItemToCart(item);
+  const cart = utils.getShoppingCart();
+  expect(cart[0]).to.be.a('object');
+  expect(cart[0]).to.have.keys('name', 'price', 'quantity');
+}
 
-it("Should return the number of items in the cart")
+it("Should return the number of items in the cart"), function() {
+  const item1 = utils.createItem('apple', 0.99)
+  const item2 = utils.createItem('bannana', 0.99)
+  utils.addItemToCart(item1);
+  utils.addItemToCart(item1);
+  utils.addItemToCart(item2);
+  const numItems = utils.getNumItemsInCart();
+  expect(numItems).to.equal(3);
+}
 
-it("Should remove items from cart")
+it("Should remove items from cart"), function() {
+  const item = utils.createItem('apple', 0.99)
+  utils.addItemToCart(item);
+  utils.removeItemFromCart(item);
+  const cart = utils.getShoppingCart();
+  expect(cart[0]).to.be.undefined;
+}
 
 // ========================================================
 // Stretch Challenges
