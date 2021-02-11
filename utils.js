@@ -7,15 +7,15 @@ const sayHello = () => {
 }
 
 const area = (w, h) => {
-  // should return the area
+  return (w >= 0 && h >= 0) ? w * h : null;
 }
 
 const perimeter = (w, h) => {
-  // should return the perimeter
+  return (w >= 0 && h >= 0) ? 2 * (w + h) : null;
 }
 
 const circleArea = r => {
-  // should return the area of the circle
+  return (r >= 0) ? Math.PI * (r ** 2) : null;
 }
 
 // ========================================================
@@ -25,10 +25,10 @@ const circleArea = r => {
 // defined) in order to make the tests pass.
 // ========================================================
 
-const shoppingCart = []
+const cart = []
 
 const clearCart = () => {
-  shoppingCart.length = 0
+  cart.length = 0
 }
 
 const createItem = (name, price) => {
@@ -36,19 +36,35 @@ const createItem = (name, price) => {
 }
 
 const getShoppingCart = () => {
-  // should return the current state of shopping cart
+  return cart;
 }
 
 const addItemToCart = (item) => {
-  // should add item to shopping cart
+  const index = cart.indexOf(item);
+  if (index !== -1) {
+    cart[index].quantity += 1;
+  } else {
+    cart.push(item);
+  }
 }
 
 const getNumItemsInCart = () => {
-  // should return the total quantity of items in cart
+  let num = 0;
+  cart.forEach((item) => {
+    num += item.quantity;
+  })
+  return num;
 }
 
 const removeItemFromCart = (item) => {
-  // should remove item from shopping cart
+  const index = cart.indexOf(item);
+  if (index !== -1) {
+    if (cart[index].quantity > 1) {
+      cart[index].quantity -= 1;
+    } else {
+      cart.splice(index, 1);
+    }
+  }
 }
 
 module.exports = {
