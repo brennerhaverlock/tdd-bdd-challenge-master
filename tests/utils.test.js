@@ -1,6 +1,7 @@
 const mocha = require("mocha")
 const chai = require("chai")
 const utils = require("../utils")
+const { util } = require("chai")
 const expect = chai.expect
 
 // ========================================================
@@ -120,8 +121,39 @@ it("Should remove items from cart"), function() {
 // Stretch Challenges
 // ========================================================
 
-it("Should update the count of items in the cart")
+it("Should update the count of items in the cart", function() {
+  const item = utils.createItem('apple', 0.99)
+  utils.addItemToCart(item);
+  utils.addItemToCart(item);
+  const cart = utils.getShoppingCart();
+  expect(cart).to.have.lengthOf(1);
+  expect(cart[0]).to.have.property('quantity', 2);
+})
 
-it("Should validate that an empty cart has 0 items")
+it("Should validate that an empty cart has 0 items", function () {
+  const numItems = utils.getNumItemsInCart();
+  expect(numItems).to.be.a('number');
+  expect(numItems)
+})
 
-it("Should return the total cost of all items in the cart")
+it("Should return the total cost of all items in the cart"), function() {
+  const item1 = utils.createItem('apple', 0.99)
+  const item2 = utils.createItem('orange', 0.99)
+  utils.addItemToCart(item1);
+  utils.addItemToCart(item1);
+  utils.addItemToCart(item2);
+  const cost = utils.getCost();
+  expect(cost).to.equal(2.97);
+}
+
+
+// ========================================================
+// Other
+// ========================================================
+
+
+it("should covert celsius to Fahrenheit", function() {
+  const celsiusToFahrenheit = util.celsiusToFahrenheit(37)
+  expect(celsiusToFahrenheit).to.be.a("number")
+  expect(celsiusToFahrenheit).to.equal(98.6)
+})
